@@ -37,7 +37,7 @@ public class ClosedAsDocumentationPerMonthTasklet extends BaseGithubSearchTaskle
 
 	@Override
 	public String getQuery() {
-		return repo + " is:issue closed:%s is:closed label:\"in: documentation\"";
+		return repo + " is:issue closed:%s is:closed label:\"documentation\"";
 	}
 
 	@Override

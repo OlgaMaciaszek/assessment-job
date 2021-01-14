@@ -74,9 +74,9 @@ public abstract class BaseGithubSearchTasklet implements Tasklet {
 		Date startDate = DateCalculationUtils.getFirstMonthStartDate();
 		Date endDate = DateCalculationUtils.getFirstMonthEndDate();
 
-		List<Integer> values = new ArrayList<>(12);
+		List<Integer> values = new ArrayList<>(13);
 
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 13; i++) {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://api.github.com/search/issues")
 					.queryParam("q", String.format(query, getDateString(startDate, endDate)));
 

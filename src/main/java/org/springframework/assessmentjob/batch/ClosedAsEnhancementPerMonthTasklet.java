@@ -65,16 +65,16 @@ public class ClosedAsEnhancementPerMonthTasklet implements Tasklet {
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 
 		String featureQuery = repo + " is:issue closed:%s is:closed label:\"type: feature\"";
-		String enhancementQuery = repo + " is:issue closed:%s is:closed label:\"type: enhancement\"";
+		String enhancementQuery = repo + " is:issue closed:%s is:closed label:\"enhancement\"";
 		int issueCount = 0;
 
 		// For each month
 		Date startDate = DateCalculationUtils.getFirstMonthStartDate();
 		Date endDate = DateCalculationUtils.getFirstMonthEndDate();
 
-		List<Integer> values = new ArrayList<>(12);
+		List<Integer> values = new ArrayList<>(13);
 
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 13; i++) {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://api.github.com/search/issues")
 					.queryParam("q", String.format(featureQuery, getDateString(startDate, endDate)));
 

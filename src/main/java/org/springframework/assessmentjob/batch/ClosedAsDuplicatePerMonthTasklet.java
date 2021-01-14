@@ -37,7 +37,7 @@ public class ClosedAsDuplicatePerMonthTasklet extends BaseGithubSearchTasklet {
 
 	@Override
 	public String getQuery() {
-		return repo + " is:issue closed:%s is:closed label:\"status: duplicate\"";
+		return repo + " is:issue closed:%s is:closed label:\"duplicate\"";
 	}
 
 	@Override

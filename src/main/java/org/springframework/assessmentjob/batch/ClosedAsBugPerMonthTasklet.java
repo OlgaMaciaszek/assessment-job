@@ -37,7 +37,7 @@ public class ClosedAsBugPerMonthTasklet extends BaseGithubSearchTasklet {
 
 	@Override
 	public String getQuery() {
-		return repo + " is:issue closed:%s is:closed label:\"type: bug\"";
+		return repo + " is:issue closed:%s is:closed label:\"bug\"";
 	}
 
 	@Override

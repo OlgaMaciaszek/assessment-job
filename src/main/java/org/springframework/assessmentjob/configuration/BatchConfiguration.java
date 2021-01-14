@@ -22,8 +22,10 @@ import org.springframework.assessmentjob.batch.ClosedAsDocumentationPerMonthTask
 import org.springframework.assessmentjob.batch.ClosedAsDuplicatePerMonthTasklet;
 import org.springframework.assessmentjob.batch.ClosedAsEnhancementPerMonthTasklet;
 import org.springframework.assessmentjob.batch.ClosedAsInvalidPerMonthTasklet;
+import org.springframework.assessmentjob.batch.ClosedAsQuestionPerMonthTasklet;
 import org.springframework.assessmentjob.batch.ClosedAsTaskPerMonthTasklet;
 import org.springframework.assessmentjob.batch.CommunityCreatedPerMonthTasklet;
+import org.springframework.assessmentjob.batch.HasMilestonePerMonth;
 import org.springframework.assessmentjob.batch.NotTriagedPerMonthTasklet;
 import org.springframework.assessmentjob.batch.ReportGeneratingTasklet;
 import org.springframework.assessmentjob.batch.TeamCreatedPerMonthTasklet;
@@ -101,6 +103,13 @@ public class BatchConfiguration {
 	}
 
 	@Bean
+	public Step closedAsQuestionPerMonthStep(ClosedAsQuestionPerMonthTasklet tasklet) {
+		return this.stepBuilderFactory.get("closedAsQuestionPerMonthStep")
+				.tasklet(tasklet)
+				.build();
+	}
+
+	@Bean
 	public Step closedAsDocumentationPerMonthStep(ClosedAsDocumentationPerMonthTasklet tasklet) {
 		return this.stepBuilderFactory.get("closedAsDocumentationPerMonthStep")
 				.tasklet(tasklet)
@@ -129,6 +138,13 @@ public class BatchConfiguration {
 	}
 
 	@Bean
+	Step hasMilestonePerMonthStep(HasMilestonePerMonth tasklet) {
+		return stepBuilderFactory.get("hasMilestonePerMonthStep")
+				.tasklet(tasklet)
+				.build();
+	}
+
+	@Bean
 	public Job job() {
 		return this.jobBuilderFactory.get("job")
 				.start(teamCreatedPerMonthStep(null))
@@ -140,7 +156,9 @@ public class BatchConfiguration {
 				.next(closedAsBugPerMonthStep(null))
 				.next(closedAsTaskPerMonthStep(null))
 				.next(closedAsDocumentationPerMonthStep(null))
+				.next(closedAsQuestionPerMonthStep(null))
 				.next(notTriagedPerMonthStep(null))
+				.next(hasMilestonePerMonthStep(null))
 				.next(reportGenerationStep(null))
 				.build();
 	}

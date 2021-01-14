@@ -71,7 +71,7 @@ public class CommunityCreatedPerMonthTasklet implements Tasklet {
 		Date startDate = DateCalculationUtils.getFirstMonthStartDate();
 		Date endDate = DateCalculationUtils.getFirstMonthEndDate();
 
-		List<Integer> values = new ArrayList<>(12);
+		List<Integer> values = new ArrayList<>(13);
 
 		List<Integer> teamMemberCreated = report.get("team_member_created");
 
