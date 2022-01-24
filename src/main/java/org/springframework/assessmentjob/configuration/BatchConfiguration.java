@@ -16,7 +16,6 @@
 
 package org.springframework.assessmentjob.configuration;
 
-import org.springframework.assessmentjob.batch.ClosedAsBackportPerMonthTasklet;
 import org.springframework.assessmentjob.batch.ClosedAsBugPerMonthTasklet;
 import org.springframework.assessmentjob.batch.ClosedAsDocumentationPerMonthTasklet;
 import org.springframework.assessmentjob.batch.ClosedAsDuplicatePerMonthTasklet;
@@ -111,13 +110,6 @@ public class BatchConfiguration {
 	}
 
 	@Bean
-	public Step closedAsBackportedPerMonthStep(ClosedAsBackportPerMonthTasklet tasklet) {
-		return this.stepBuilderFactory.get("closedAsBackportedPerMonthStep")
-				.tasklet(tasklet)
-				.build();
-	}
-
-	@Bean
 	public Step notTriagedPerMonthStep(NotTriagedPerMonthTasklet tasklet) {
 		return this.stepBuilderFactory.get("notTriagedPerMonthStep")
 				.tasklet(tasklet)
@@ -160,7 +152,6 @@ public class BatchConfiguration {
 				.next(closedAsDuplicatePerMonthStep(null))
 				.next(closedAsInvalidPerMonthStep(null))
 				.next(closedAsEnhancementPerMonthStep(null))
-				.next(closedAsBackportedPerMonthStep(null))
 				.next(closedAsBugPerMonthStep(null))
 				.next(closedAsTaskPerMonthStep(null))
 				.next(closedAsDocumentationPerMonthStep(null))

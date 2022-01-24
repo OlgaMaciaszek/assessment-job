@@ -59,8 +59,9 @@ public class ClosedAsInvalidPerMonthTasklet extends ReportTasklet {
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 
-		String declinedQuery = this.properties.getProjectRepo() + " is:issue closed:%s is:closed label:\"status: declined\"";
-		String invalidQuery = this.properties.getProjectRepo() + " is:issue closed:%s is:closed label:\"status: invalid\"";
+		String declinedQuery = this.properties.getProjectRepo() + " is:issue closed:%s is:closed label:\"wontfix\"";
+		String invalidQuery = this.properties.getProjectRepo() + " is:issue closed:%s is:closed label:\"invalid\"";
+		String cloeseableQuery = this.properties.getProjectRepo() + " is:issue closed:%s is:closed label:\"closeable\"";
 		long issueCount = 0;
 
 		// For each month
@@ -82,6 +83,16 @@ public class ClosedAsInvalidPerMonthTasklet extends ReportTasklet {
 
 			builder = UriComponentsBuilder.fromHttpUrl("https://api.github.com/search/issues")
 					.queryParam("q", String.format(invalidQuery, getDateString(startDate, endDate)));
+
+			uri = builder.build().encode().toUri();
+			System.out.println(">> " + uri.toString());
+			response = this.restTemplate.getForEntity(uri, String.class);
+
+			result = new ObjectMapper().readValue(response.getBody(), HashMap.class);
+			issueCount += ((Integer) result.get("total_count")).longValue();
+
+			builder = UriComponentsBuilder.fromHttpUrl("https://api.github.com/search/issues")
+					.queryParam("q", String.format(cloeseableQuery, getDateString(startDate, endDate)));
 
 			uri = builder.build().encode().toUri();
 			System.out.println(">> " + uri.toString());

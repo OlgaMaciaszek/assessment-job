@@ -36,7 +36,7 @@ public class ClosedAsQuestionPerMonthTasklet extends BaseGithubSearchTasklet {
 
 	@Override
 	public String getQuery() {
-		return properties.getProjectRepo() + " is:issue closed:%s is:closed label:\"for: stackoverflow\"";
+		return properties.getProjectRepo() + " is:issue closed:%s is:closed label:\"question\"";
 	}
 
 	@Override

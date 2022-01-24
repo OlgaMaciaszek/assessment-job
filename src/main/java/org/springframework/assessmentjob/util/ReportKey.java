@@ -27,7 +27,6 @@ public enum ReportKey {
 	CLOSED_AS_QUESTION("Closed as a question (StackOverflow/etc) per month"),
 	CLOSED_AS_DECLINED("Closed as declined/invalid or equivalent per month"),
 	CLOSED_AS_ENHANCEMENT("Closed as an enhancement per month"),
-	CLOSED_AS_BACKPORT("Closed to be backported/forward-port per month"),
 	CLOSED_AS_REGRESSION("Closed as regression or bug per month"),
 	CLOSED_AS_TASK("Closed as task/dependency upgrade/etc per month"),
 	CLOSED_AS_DOCS("Closed as documentation/site related issue per month"),
